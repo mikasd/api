@@ -16,3 +16,7 @@ path = "src/lib.rs"
 [[bin]]
 path = "src/main.rs"
 name = "skel"
+
+[dev-dependencies]
+actix-rt = "2"
+reqwest = "0.11"

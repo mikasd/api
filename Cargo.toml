@@ -20,3 +20,4 @@ name = "skel"
 [dev-dependencies]
 actix-rt = "2"
 reqwest = "0.11"
+tokio = "1"

@@ -1,6 +1,6 @@
 #[actix_rt::test]
 async fn health_check_works() {
-    spawn_app().await.expect("Failed to spawn app");
+    spawn_app();
 
     let client = reqwest::Client::new();
 
@@ -15,6 +15,8 @@ async fn health_check_works() {
     assert_eq!(Some(0), response.content_length());
 }
 
-async fn spawn_app() -> () {
-    todo!()
+fn spawn_app() -> () {
+    let server = skel::run().expect("failed to bind to address");
+
+    let _ = tokio::spawn(server);
 }

@@ -1,4 +1,4 @@
-name: Rust
+name: general_ci_checks_fmt_clippy_coverage
 
 on: [push, pull_request]
 

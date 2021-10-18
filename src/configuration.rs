@@ -1,7 +1,10 @@
+use actix_web::web::Data;
+use sqlx::Database;
+
 #[derive(serde::Deserialize)]
 pub struct Settings {
     pub database: DatabaseSettings,
-    pub application_port: u16
+    pub application_port: u16,
 }
 
 #[derive(serde::Deserialize)]
@@ -22,4 +25,13 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
     settings.merge(config::File::with_name("configuration"))?;
     //try to convert cfg vals into settings type
     settings.try_into()
+}
+
+impl DatabaseSettings {
+    pub fn connection_string(&self) -> String {
+        format!(
+            "postgres://{}:{}@{}:{}/{}",
+            self.username, self.password, self.host, self.port, self.database_name
+        )
+    }
 }
